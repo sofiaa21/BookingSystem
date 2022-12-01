@@ -1,0 +1,79 @@
+﻿@page "/ViewResources"
+@using Model
+@using HttpClients.ClientInterfaces
+@inject IResourceService resourceService;
+@inject NavigationManager navMgr
+
+<h3>Resources</h3>
+
+
+<div>
+    <button @onclick="LoadResources" class="loadButton"> Load </button>
+</div>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div>
+        <span>@message</span>
+    </div>
+}
+
+@if (resources == null) {}
+else if (!resources.Any())
+{
+    <p> No resources to display</p>
+}
+
+else 
+{
+        <table class="table">
+            <thead>
+            <tr>
+                <th> ID </th>
+                <th> Name </th>
+                <th> Quantity </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in resources)
+            {<tr>
+                 <td>@item.Id</td> 
+                 <td>@item.Name</td>
+                 <td>@item.Quantity</td>
+                 
+                 <td>
+                     <button class="bookResourceBtn" @onclick="@(()=>navMgr.NavigateTo($"/Resource/{item.Id}"))">Book</button>
+                 </td>
+             </tr>
+            }
+            </tbody>
+        </table>
+    
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <label style="color: red">@message</label>
+    }
+}
+
+
+
+@code {
+    private IEnumerable<Resource>? resources;
+ 
+    private string message = "";
+
+    private async Task LoadResources()
+    {
+        try
+        {
+            resources = await resourceService.GetAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            message = e.Message;
+        }
+    }
+    
+     
+}

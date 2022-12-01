@@ -1,0 +1,121 @@
+﻿@page "/BookResource/{id:int}"
+@using Model.DTOs
+@using HttpClients.ClientInterfaces
+@using System.Xml
+@using Model
+@inject IResourceService resourceService;
+@inject IBookingService bookingService;
+
+<h3>Book Resource</h3>
+
+<div class="card">
+    @if (dto == null)
+    {
+        <label> Loading resource</label>
+    }
+    else
+    {
+        <h2> Book this resource </h2>
+        <div class="form-group-field">
+            <label> @resource.Name</label>
+        </div>
+        <div class="form-group-field">
+            <label>Amount</label>
+            <input type="text" @bind=@amountInput/>
+        </div>
+        <div class="form-group-field">
+            <label> Start date </label>
+            <InputDateType @bind="startDate"></InputDateType>
+            <label> End date </label>
+            <InputDateType @bind="endDate"></InputDateType>
+
+        </div>
+        <div class="button-row">
+            <button @onclick="CreateBooking" class="acceptBtn"></button>
+        </div>
+    }
+
+</div>
+
+
+@if (resource == null)
+{
+    <p> No resource to display</p>
+}
+
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private string msg = "";
+    private BookingDto dto = null!;
+    private ResourceGetByIdDto resource = null!;
+
+    public DateTime startDate;
+    public DateTime endDate;
+    public int amountInput;
+
+    private IEnumerable<Booking>? bookings;
+
+    private async Task LoadBookings()
+    {
+        try
+        {
+            bookings = await bookingService.GetAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        resource = await resourceService.GetByIdAsync(Id);
+
+    }
+
+
+    private async Task CreateBooking()
+    {
+        ValidateTimeRange(startDate, endDate);
+        ValidateAmountInput(amountInput);
+
+
+        BookingDto newBooking = new(dto.Id, startDate, endDate, amountInput, resource.Id);
+        await bookingService.CreateBooking(dto);
+    //show confirmation
+        Console.WriteLine($"EMAIL SENT TO admin@admin.com FOR CREATED BOOKING WITH ID {dto.Id}");
+    }
+
+    private void ValidateAmountInput(int amount)
+    {
+        if (amount > resource.Quantity)
+        {
+            Console.WriteLine("Amount too large");
+            throw new Exception("Amount is too large");
+        }
+    }
+
+    private void ValidateTimeRange(DateTime start, DateTime end)
+    {
+        foreach (var booking in bookings )
+        {
+            if (booking.ResourceId == resource.Id)
+            {
+                 DateRange range = new DateRange(booking.DateFrom, booking.DateTo);
+                if (range.Includes(start) || (range.Includes(end)))
+                {
+                    throw new Exception("Resource is booked!");
+                }
+                
+            }
+        }
+        
+    }
+
+}

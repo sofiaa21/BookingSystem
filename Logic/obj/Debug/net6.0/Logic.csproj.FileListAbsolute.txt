@@ -1,0 +1,17 @@
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\bin\Debug\net6.0\Logic.deps.json
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\bin\Debug\net6.0\Logic.dll
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\bin\Debug\net6.0\Logic.pdb
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\bin\Debug\net6.0\DataAccess.dll
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\bin\Debug\net6.0\Model.dll
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\bin\Debug\net6.0\DataAccess.pdb
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\bin\Debug\net6.0\Model.pdb
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.csproj.AssemblyReference.cache
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.AssemblyInfoInputs.cache
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.AssemblyInfo.cs
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.csproj.CoreCompileInputs.cache
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.csproj.CopyComplete
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.dll
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\refint\Logic.dll
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\Logic.pdb
+C:\Users\sofia\BookingSystem\BookingSystem\Logic\obj\Debug\net6.0\ref\Logic.dll
